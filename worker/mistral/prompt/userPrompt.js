@@ -1,20 +1,13 @@
-export default class PromptPartition {
-    constructor(data) {
-        this.level = data.level;
-        this.completedPieces = data.completedPieces;
-        this.prompt = null;
-    }
-
-    creatingPrompt() {
-            this.prompt = `
+export function createPrompt(level, completedPieces){
+    return `
 Tu es un professeur de piano.
 
 Voici le niveau actuel de l'élève :
 
-Niveau général : ${this.level}/100
+Niveau général : ${level}
 
 Morceaux déjà terminés :
-${this.completedPieces.join(", ")}
+${completedPieces.join(", ")}
 
 Propose 3 morceaux adaptés à son niveau.
 
@@ -47,5 +40,5 @@ sous cette forme:
   ]
 }
 `;
-    }
+
 }

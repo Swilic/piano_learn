@@ -46,4 +46,14 @@ export default class Network {
         }
         return null;
     }
+    async fetchMistral(mistral) {
+        return await fetch(
+            mistral.apiUrl,
+            {
+                method: mistral.method,
+                headers: mistral.headers,
+                body: JSON.stringify(mistral.body)
+            }
+        );
+    }
 }

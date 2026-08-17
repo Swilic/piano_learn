@@ -1,3 +1,4 @@
+import Mistral from "./mistral/Mistral.js";
 import Network from "./network/Network.js";
 import { corsHeaders } from "./network/corsHeaders.js";
 export default {
@@ -14,51 +15,10 @@ export default {
             return dataValidityResponse;
         }
 
-        // return new Response(
-        //     JSON.stringify({
-        //         message: "Données reçues avec succès",
-        //         data: network.data
-        //     }),
-        //     {
-        //         headers: {
-        //             ...corsHeaders,
-        //             "Content-Type": "application/json"
-        //         }
-        //     }
-        // );
+        const mistral = new Mistral(network.data);
 
-        const prompt = "Est-ce que tu gardes une trace de notre conversation ?";
+        const mistralResponse = await network.fetchMistral(mistral);
 
-
-        // Création du prompt
-
-        const mistralResponse = await fetch(
-            "https://api.mistral.ai/v1/chat/completions",
-            {
-                method: "POST",
-
-                headers: {
-                    "Authorization": `Bearer ${env.MISTRAL_API_KEY}`,
-                    "Content-Type": "application/json",
-                },
-
-                body: JSON.stringify({
-                    model: "mistral-small-latest",
-
-                    messages: [
-                        {
-                            role: "system",
-                            content:
-                                "Tu es un professeur de piano spécialisé dans la progression des pianistes débutants et intermédiaires."
-                        },
-                        {
-                            role: "user",
-                            content: prompt
-                        }
-                    ]
-                })
-            }
-        );
 
 
         if (!mistralResponse.ok) {
@@ -95,7 +55,7 @@ export default {
         // Réponse envoyée à ton site
         return new Response(
             JSON.stringify({
-                recommendation: answer
+                recommandation: answer
             }),
             {
                 headers: {
