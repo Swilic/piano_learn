@@ -19,6 +19,7 @@ Pour chaque morceau, donne :
 - compositeur
 - difficulté sur 10
 - raison de la recommandation
+- conseil supplémentaire pour l'apprentissage
 - combien de fois il devrait le jouer pour monter d'un niveau
 sous cette forme:
 {
@@ -28,6 +29,7 @@ sous cette forme:
       "composer": "Pachelbel",
       "difficulty": 5,
       "reason": "...",
+      "conseil": "...",
       "times_to_play": 10
     },
     {
@@ -35,10 +37,12 @@ sous cette forme:
       "composer": "Yiruma",
       "difficulty": 5.5,
       "reason": "...",
+      "conseil": "...",
       "times_to_play": 3
     }
   ]
 }
+Tu dois me répondre en JSON, sans texte supplémentaire, et uniquement le JSON.
 `;
 
 }

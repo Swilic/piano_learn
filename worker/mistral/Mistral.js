@@ -1,4 +1,5 @@
 import PromptPartition from "./prompt/PromptPartition";
+import { corsHeaders } from "../network/corsHeaders.js";
 
 const role = {
     system: "system",
@@ -36,12 +37,48 @@ export default class Mistral {
             ]
         };
     }
-    // TODO: well
-    handleErrorResponse() {
 
+    async handleErrorResponse(mistral) {
+        const errorText = await mistral.text()
+
+        console.error(
+            "Mistral error:",
+            mistralResponse.status,
+            errorText
+        );
+
+        return new Response(
+            JSON.stringify({
+                error: "Erreur Mistral",
+                status: mistralResponse.status,
+                details: errorText
+            }),
+            {
+                status: mistralResponse.status,
+                headers: {
+                    ...corsHeaders,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
     }
-    // TODO: well
-    handleValidResponse() {
 
+    async handleValidResponse(mistral) {
+        const mistralData = await mistral.json();
+
+        const answer =
+            mistralData.choices[0].message.content;
+
+        return new Response(
+            JSON.stringify({
+                recommandation: answer
+            }),
+            {
+                headers: {
+                    ...corsHeaders,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
     }
 } 
