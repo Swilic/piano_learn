@@ -1,8 +1,13 @@
 {
   "dependencies": {
-    "@mistralai/mistralai": "^2.6.1"
+    "@mistralai/mistralai": "^2.6.1",
+    "sass": "^1.103.1"
   },
   "devDependencies": {
     "wrangler": "^4.123.0"
+  },
+  "scripts": {
+    "sass": "sass ./src/styles/scss/main.scss:./src/styles/index.css",
+    "sass:watch": "sass --watch ./src/styles/scss/main.scss:./src/styles/index.css"
   }
 }
