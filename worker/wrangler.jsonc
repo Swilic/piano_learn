@@ -1,5 +1,13 @@
 {
   "name": "pianolearn",
   "compatibility_date": "2026-08-17",
-  "main": "index.js"
+  "main": "index.js",
+
+    "d1_databases": [
+    {
+      "binding": "piano_learn",
+      "database_name": "piano-learn",
+      "database_id": "92468766-9717-460e-8e19-5c41e0f30232"
+    }
+  ]
 }

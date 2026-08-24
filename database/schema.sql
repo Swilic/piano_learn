@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS progression (
+    id INTEGER PRIMARY KEY,
+    level INTEGER NOT NULL DEFAULT 1
+);
+
+CREATE TABLE IF NOT EXISTS completed_pieces (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    composer TEXT NOT NULL,
+    title TEXT NOT NULL,
+    times_played INTEGER NOT NULL DEFAULT 0
+);
+
+INSERT OR IGNORE INTO progression (id, level)
+VALUES (1, 3);
