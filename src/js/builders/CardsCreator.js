@@ -2,15 +2,17 @@ const cardClass = "card-progression";
 export class CardsCreator {
     constructor() {
         this.cardsContainer = document.getElementsByClassName("progression-container")[0];
-        this.cardsHeight = 170;
+        this.cardsHeight = 210;
+        this.cardsPerRow = 3;
     }
-    createCards(progressionData, minHeight) {
+    createCards(progressionData, windowHeight) {
         progressionData.completedPieces.map((data) => {
             const card = document.createElement("div");
             card.classList.add(cardClass);
             this.createElementsWithCardValues(card, data);
             this.cardsContainer.appendChild(card);
         });
+        this.fillCardsContainerWithEmptyCards(windowHeight);
     }
 
     createElementsWithCardValues(card, progressionData) {
@@ -19,9 +21,26 @@ export class CardsCreator {
         const h3Elements = document.createElement("h3");
         h3Elements.textContent = progressionData.title;
         const h4Elements = document.createElement("h4");
-        h4Elements.textContent = "Time Played: " + progressionData.timePlayed;
+        h4Elements.textContent = "Time Played: " + progressionData.time_played;
         card.appendChild(h2Elements);
         card.appendChild(h3Elements);
         card.appendChild(h4Elements);
+    }
+
+    fillCardsContainerWithEmptyCards(windowHeight) {
+        const totalEmptyCardsNeeded = this.computeEmptyCardsNeeded(windowHeight);
+        for (let i = 0; i < totalEmptyCardsNeeded  ; i++) {
+            const emptyCard = document.createElement("div");
+            emptyCard.classList.add(cardClass); // HOTFIX: same class
+            this.cardsContainer.appendChild(emptyCard);
+        }
+    }
+    computeEmptyCardsNeeded(windowHeight) {
+        const spaceAvailable = windowHeight - this.cardsContainer.getBoundingClientRect().top;
+        const existingCardsCount = this.cardsContainer.getElementsByClassName(cardClass).length;
+        const missingCardsCount = (this.cardsPerRow - (existingCardsCount % this.cardsPerRow)) % this.cardsPerRow;
+        let rowsNeeded = Math.ceil(spaceAvailable / (this.cardsHeight)); 
+        rowsNeeded -= Math.ceil(existingCardsCount / this.cardsPerRow);
+        return rowsNeeded * this.cardsPerRow + missingCardsCount;
     }
 }

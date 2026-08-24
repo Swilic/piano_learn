@@ -13,13 +13,13 @@ export default class ParserRequest {
     }
 
     keyDataValidation(data) {
-        const requiredKeys = ['level', 'completedPieces'];
+        const requiredKeys = ['level', 'completed_pieces'];
         const missingKeys = requiredKeys.filter(key => !(key in data));
 
         if (missingKeys.length > 0) {
             throw new Error(`Missing required keys: ${missingKeys.join(', ')}`);
         }
-        if (typeof data.level !== 'number' || !Array.isArray(data.completedPieces)) {
+        if (typeof data.level !== 'number' || !Array.isArray(data.completed_pieces)) {
             throw new Error("Invalid data types for keys");
         }
     }

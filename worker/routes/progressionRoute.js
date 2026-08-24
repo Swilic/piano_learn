@@ -1,4 +1,5 @@
 import { ProgressionQuery } from "../database/ProgressionQuery.js";
+import { failureResponse } from "../network/networkResponseJsonType.js";
 import { handleRequest as piecesRoute } from "./piecesRoute.js";
 
 export function handleRequest(request, env) {
@@ -9,16 +10,14 @@ export function handleRequest(request, env) {
         return piecesRoute(request, env, subPath);
     }
     
+    if (subPath !== "" && subPath !== "/") {
+        return failureResponse("Progression Route Not Found", 404);
+    }
     const progressionQuery = new ProgressionQuery(env);
-    if (request.method === "GET" && url.pathname === "/progression") {
+    if (request.method === "GET" ) {
         return progressionQuery.fetchProgressionData();
     }
-    else if (request.method === "POST" && url.pathname === "/progression") {
+    else if (request.method === "POST") {
         return progressionQuery.modifyProgressionData(request);
     }
-
-    return new Response(JSON.stringify({ error: "Progression Route Not Found" }), {
-        status: 404,
-        headers: { "Content-Type": "application/json" }
-    });
 }

@@ -1,4 +1,5 @@
 export function createPrompt(level, completedPieces){
+    const completedPiecesString = createCompletedPiecesString(completedPieces);
     return `
 Tu es un professeur de piano.
 
@@ -7,7 +8,7 @@ Voici le niveau actuel de l'élève :
 Niveau général : ${level}
 
 Morceaux déjà terminés :
-${completedPieces.join(", ")}
+${completedPiecesString}
 
 Propose 3 morceaux adaptés à son niveau.
 
@@ -45,4 +46,8 @@ sous cette forme:
 Tu dois me répondre en JSON, sans texte supplémentaire, et uniquement le JSON.
 `;
 
+}
+
+function createCompletedPiecesString (completedPieces) {
+    return completedPieces.map(piece => `${piece.composer} - ${piece.title}`).join(", ");
 }

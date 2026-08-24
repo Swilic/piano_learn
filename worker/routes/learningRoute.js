@@ -18,6 +18,7 @@ export async function handleRequest(request) {
 
     const mistralResponse = await network.fetchMistral(mistral);
     if (!mistralResponse.ok) {
+        console.error("Mistral API returned an error:", mistralResponse.status);
         return mistral.handleErrorResponse(mistralResponse);
     }
     return mistral.handleValidResponse(mistralResponse);
