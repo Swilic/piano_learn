@@ -1,5 +1,6 @@
 import { handleRequest as learningRequest } from "./routes/learningRoute.js";
 import { handleRequest as progressionRequest } from "./routes/progressionRoute.js";
+import { failureResponse } from "./network/networkResponseJsonType.js";
 
 export default {
     async fetch(request, env) {
@@ -11,9 +12,6 @@ export default {
         } else if (url.pathname.startsWith("/progression")) {
             return await progressionRequest(request, env);
         }
-        return new Response(JSON.stringify({ error: "Not Found" }), {
-            body: JSON.stringify({ error: "Not Found" }),
-            status: 404
-        });
+        return failureResponse("Invalid request path or method.");
     }
 };

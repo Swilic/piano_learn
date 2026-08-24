@@ -5,16 +5,15 @@ export function handleRequest(request, env) {
     const url = new URL(request.url);
     const subPath = url.pathname.slice("/progression".length);
 
-    if (subPath === "/pieces") {
-        return piecesRoute(request, env);
+    if (subPath.startsWith("/pieces")) {
+        return piecesRoute(request, env, subPath);
     }
     
+    const progressionQuery = new ProgressionQuery(env);
     if (request.method === "GET" && url.pathname === "/progression") {
-        const progressionQuery = new ProgressionQuery(env);
         return progressionQuery.fetchProgressionData();
     }
     else if (request.method === "POST" && url.pathname === "/progression") {
-        const progressionQuery = new ProgressionQuery(env);
         return progressionQuery.modifyProgressionData(request);
     }
 
@@ -22,5 +21,4 @@ export function handleRequest(request, env) {
         status: 404,
         headers: { "Content-Type": "application/json" }
     });
-
 }

@@ -1,5 +1,5 @@
 import { corsHeaders } from "../network/corsHeaders.js";
-
+import { successResponse, failureResponse } from "../network/networkResponseJsonType.js";
 import ParserRequest from "../parser/ParserRequest.js";
 
 export default class Network {
@@ -15,10 +15,7 @@ export default class Network {
         }
 
         if (this.request.method !== "POST") {
-            return new Response("Method not allowed", {
-                status: 405,
-                headers: corsHeaders
-            });
+            return failureResponse("Method not allowed", 405);
         }
         return null;
     }
@@ -38,11 +35,7 @@ export default class Network {
         try {
             await this.parseRequest();
         } catch (error) {
-            console.error("Error parsing request:", error);
-            return new Response("Erreur Serveur", {
-                status: 500,
-                headers: corsHeaders,
-            });
+            return failureResponse("Erreur serveur", 500);
         }
         return null;
     }
