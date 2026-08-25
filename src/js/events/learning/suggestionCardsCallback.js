@@ -1,41 +1,50 @@
 import { clearPreviousSuggestions } from "./suggestionsButtonCallback.js";
+import { savePiece } from "../../network/addPieceRequest.js";
+import { loadProgression, checkIfPieceAlreadyCompleted } from "../../repositories/progressionData.js";
+import { handleMathButtonEvent } from "./mathButtonCallback.js";
+import { createActiveCard } from "../../builders/learningCard.js";
 
-export function handleSuggestionEvent(event) {
+export async function handleSuggestionEvent(event) {
     clearPreviousSuggestions();
-    createActiveCard(event.currentTarget);
-    // Call the function to send request to the database
+    const jsonData = await parseSelectedCardData(event.currentTarget);
+    savePieceSessionStorage(jsonData);
+    createActiveCard()
+    sendRequestToDatabase(jsonData);
+    handleEventListenersForMathButtons();
 }
 
-function createActiveCard(selectedCard) {
-    const activeCard = createElementsActiveCard(selectedCard);
-    activeCard.appendChild(createSearchPartitionLink(selectedCard));
-    document.getElementsByClassName('content-active-card')[0].appendChild(document.createElement('h2')).textContent = "Active Card";
-    document.getElementsByClassName('content-active-card')[0].appendChild(activeCard);
-}
-
-function createElementsActiveCard(selectedCard) {
-    const activeCard = document.createElement('div');
-    activeCard.classList.add('active-card');
-    const composer = document.createElement('H2');
-    composer.classList.add('composer');
-    composer.textContent = selectedCard.querySelector('.composer').textContent.slice("Composer: ".length);
-    const title = document.createElement('H3');
-    title.classList.add('title');
-    title.textContent = selectedCard.querySelector('.title').textContent.slice("Title: ".length);
-    activeCard.appendChild(composer);
-    activeCard.appendChild(title);
-    return activeCard;
-}
-function createSearchPartitionLink(selectedCard) {
-    const searchPartitionLink = document.createElement('a');
-    searchPartitionLink.classList.add('search-partition-link');
+async function parseSelectedCardData(selectedCard) {
     const composer = selectedCard.querySelector('.composer').textContent.slice("Composer: ".length);
     const title = selectedCard.querySelector('.title').textContent.slice("Title: ".length);
-    const query = `${composer} ${title}`;
-    searchPartitionLink.href = `https://www.google.com/search?q=site:imslp.org+${encodeURIComponent(query)}`;
-    searchPartitionLink.target = '_blank';
-    searchPartitionLink.textContent = 'Search for Partition';
-    return searchPartitionLink;
+    const completedPieces = await loadProgression();
+    const timePlayed = checkIfPieceAlreadyCompleted({ composer, title }, completedPieces.completedPieces);
+    return { composer, title, timePlayed: timePlayed.timePlayed };
+}
+
+function handleEventListenersForMathButtons() {
+    const mathButtons = document.getElementsByClassName('math');
+    for (let i = 0; i < mathButtons.length; i++) {
+        mathButtons[i].addEventListener('click', handleMathButtonEvent);
+    }
+}
+
+function savePieceSessionStorage(jsonData) {
+    const completed_piece = {
+        composer: jsonData.composer,
+        title: jsonData.title,
+        timePlayed: jsonData.timePlayed,
+    };
+    sessionStorage.setItem('activePiece', JSON.stringify(completed_piece));
+}
+
+// BACKEND PART
+function sendRequestToDatabase(jsonData) {
+    const completed_piece = {
+        composer: jsonData.composer,
+        title: jsonData.title,
+        time_played: 0,
+    };
+    savePiece(completed_piece);
 }
 
 export function clearActiveCard() {
@@ -43,4 +52,5 @@ export function clearActiveCard() {
     while (contentActiveCard.firstChild) {
         contentActiveCard.removeChild(contentActiveCard.firstChild);
     }
+    sessionStorage.removeItem('activePiece');
 }

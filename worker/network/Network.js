@@ -10,7 +10,10 @@ export default class Network {
     checkHeaders() {
         if (this.request.method === "OPTIONS") {
             return new Response(null, {
-                headers: corsHeaders
+                status: 204,
+                headers: {
+                    ...corsHeaders,
+                },
             });
         }
 

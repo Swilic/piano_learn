@@ -17,7 +17,8 @@ export class PiecesQuery {
 
     async modifyPiecesData(request) {
         const requestBody = await request.json();
-        if (checkBeforeInsert(requestBody).success === false) {
+        const checkResult = await this.checkBeforeUpdate(requestBody);
+        if (checkResult.ok === false) {
             return failureResponse("Piece does not exist.");
         }
         const result = await this.env.piano_learn
@@ -32,7 +33,8 @@ export class PiecesQuery {
 
     async addNewPiece(request) {
         const requestBody = await request.json();
-        if (checkBeforeInsert(requestBody).success === false) {
+        const checkResult = await this.checkBeforeInsert(requestBody);
+        if (checkResult.ok === false) {
             return failureResponse("Piece already exists.");
         }
         const result = await this.env.piano_learn
@@ -45,17 +47,29 @@ export class PiecesQuery {
         return successResponse("New piece added.");
     }
 
-    async checkBeforeInsert(requestBody) {
+    async checkDataExistence(requestBody) {
         const result = await this.env.piano_learn
             .prepare("SELECT * FROM completed_pieces WHERE composer = ? AND title = ?")
             .bind(requestBody.composer, requestBody.title)
             .all();
         if (!result.success) {
-            return failureResponse("Failed to check for existing piece.");
+            return failureResponse("failed to check for existing piece.");
         }
-        if (result.results.length > 0) {
+        return result;
+    }
+
+    async checkBeforeInsert(requestBody) {
+        const result = await this.checkDataExistence(requestBody);
+        if (result.ok === false || result.results.length > 0) {
             return failureResponse("Piece already exists.");
         }
         return successResponse("Piece does not exist.");
+    }
+    async checkBeforeUpdate(requestBody) {
+        const result = await this.checkDataExistence(requestBody);
+        if (result.ok === false || result.results.length === 0) {
+            return failureResponse("Piece does not exist.");
+        }
+        return successResponse("Piece exists.");
     }
 }

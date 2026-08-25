@@ -3,10 +3,13 @@ import { clearActiveCard } from "./suggestionCardsCallback.js";
 
 export async function handleSuggestionEvent() {
     clearActiveCard();
-    const data = await askMistralForSuggestions();
-    const message = parseRecommendationData(data).recommandations;
+    // const data = await askMistralForSuggestions();
+    // const message = parseRecommendationData(data).recommandations;
+    const message = [{ 
+        composer: "Ludwig van Beethoven", title: "Moonlight Sonata", times_to_play: 5, reason: "It's a beautiful piece that will improve your finger strength.", advice: "Focus on the dynamics and expression." }];
 
-    for (let i = 0; i < 3; i++) {
+
+    for (let i = 0; i < message.length; i++) {
         const suggestedPiece = message[i];
         const paragraph = createSuggestionCard(suggestedPiece);
         document.getElementById('content-suggestion').appendChild(paragraph);
@@ -36,7 +39,7 @@ function createEachElementInSuggestionCard(suggestedPiece) {
     reasoning.textContent = `Pourquoi: ${suggestedPiece.reason}`;
     const advice = document.createElement('li');
     advice.classList.add('advice');
-    advice.textContent = `Conseil: ${suggestedPiece.conseil}`;
+    advice.textContent = `Conseil: ${suggestedPiece.advice}`;
     return [composer, title, timePlayed, reasoning, advice];
 }
 

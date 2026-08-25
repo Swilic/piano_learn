@@ -1,7 +1,7 @@
 import { PiecesQuery } from "../database/PiecesQuery.js";
 import { failureResponse } from "../network/networkResponseJsonType.js";
 
-export function handleRequest(request, env, path) {
+export async function handleRequest(request, env, path) {
     const subPath = path.slice("/pieces".length);
 
     if (subPath !== "" && subPath !== "/") {
@@ -15,7 +15,8 @@ export function handleRequest(request, env, path) {
         return piecesQuery.modifyPiecesData(request);
     }
     else if (request.method === "PUT") {
-        return piecesQuery.addNewPiece(request);
+        const response = await piecesQuery.addNewPiece(request);
+        return response;
     }
     return failureResponse("Method not allowed", 405);
 }
