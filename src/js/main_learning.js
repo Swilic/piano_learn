@@ -28,3 +28,6 @@ function generateRecommendation(level, completedPieces) {
             console.error(error);
         });
 }
+
+import { setupEvents } from "./events/learning/setupEvents.js ";
+setupEvents();

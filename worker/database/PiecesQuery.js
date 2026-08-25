@@ -17,7 +17,9 @@ export class PiecesQuery {
 
     async modifyPiecesData(request) {
         const requestBody = await request.json();
-
+        if (checkBeforeInsert(requestBody).success === false) {
+            return failureResponse("Piece does not exist.");
+        }
         const result = await this.env.piano_learn
             .prepare("UPDATE completed_pieces SET time_played = ? WHERE composer = ? AND title = ?")
             .bind(requestBody.time_played, requestBody.composer, requestBody.title)
@@ -30,6 +32,9 @@ export class PiecesQuery {
 
     async addNewPiece(request) {
         const requestBody = await request.json();
+        if (checkBeforeInsert(requestBody).success === false) {
+            return failureResponse("Piece already exists.");
+        }
         const result = await this.env.piano_learn
             .prepare("INSERT INTO completed_pieces (composer, title, time_played) VALUES (?, ?, ?)")
             .bind(requestBody.composer, requestBody.title, requestBody.time_played)
@@ -38,5 +43,19 @@ export class PiecesQuery {
             return failureResponse("Failed to add new piece.");
         }
         return successResponse("New piece added.");
+    }
+
+    async checkBeforeInsert(requestBody) {
+        const result = await this.env.piano_learn
+            .prepare("SELECT * FROM completed_pieces WHERE composer = ? AND title = ?")
+            .bind(requestBody.composer, requestBody.title)
+            .all();
+        if (!result.success) {
+            return failureResponse("Failed to check for existing piece.");
+        }
+        if (result.results.length > 0) {
+            return failureResponse("Piece already exists.");
+        }
+        return successResponse("Piece does not exist.");
     }
 }
