@@ -31,7 +31,7 @@ sous cette forme:
       "difficulty": 5,
       "reason": "...",
       "conseil": "...",
-      "times_to_play": 10
+      "time_to_play": 10
     },
     {
       "title": "River Flows in You",
@@ -39,7 +39,7 @@ sous cette forme:
       "difficulty": 5.5,
       "reason": "...",
       "conseil": "...",
-      "times_to_play": 3
+      "time_to_play": 3
     }
   ]
 }

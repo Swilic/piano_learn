@@ -1,5 +1,6 @@
 import { handleSuggestionEvent as handleSuggestionButtonEvent } from "./suggestionsButtonCallback.js";
 import { handleSuggestionEvent as handleSuggestionCardEvent } from "./suggestionCardsCallback.js";
+import { handleMathButtonEvent } from "./mathButtonCallback.js";
 
 export function setupEvents() {
     const mistralButton = document.getElementById('ask-mistral-button');
@@ -19,3 +20,9 @@ function suggestionCardClickHandler() {
     }
 }
 
+export function handleEventListenersForMathButtons() {
+    const mathButtons = document.getElementsByClassName('math');
+    for (let i = 0; i < mathButtons.length; i++) {
+        mathButtons[i].addEventListener('click', handleMathButtonEvent);
+    }
+}

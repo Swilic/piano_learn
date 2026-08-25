@@ -38,8 +38,8 @@ export class PiecesQuery {
             return failureResponse("Piece already exists.");
         }
         const result = await this.env.piano_learn
-            .prepare("INSERT INTO completed_pieces (composer, title, time_played) VALUES (?, ?, ?)")
-            .bind(requestBody.composer, requestBody.title, requestBody.time_played)
+            .prepare("INSERT INTO completed_pieces (composer, title, time_played, time_to_play) VALUES (?, ?, ?, ?)")
+            .bind(requestBody.composer, requestBody.title, requestBody.time_played, requestBody.time_to_play)
             .run();
         if (!result.success) {
             return failureResponse("Failed to add new piece.");

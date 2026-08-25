@@ -1,6 +1,6 @@
-export async function updatePiece(json) {
+export async function updateProgression(json) {
     try {
-        const response = await fetch('http://localhost:8787/progression/pieces', {
+        const response = await fetch('http://localhost:8787/progression', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -12,6 +12,6 @@ export async function updatePiece(json) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
     } catch (error) {
-        console.error('Error updating piece:', error);
+        console.error('Error updating progression:', error);
     }
 }

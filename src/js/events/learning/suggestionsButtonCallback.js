@@ -6,7 +6,7 @@ export async function handleSuggestionEvent() {
     // const data = await askMistralForSuggestions();
     // const message = parseRecommendationData(data).recommandations;
     const message = [{ 
-        composer: "Ludwig van Beethoven", title: "Moonlight Sonata", times_to_play: 5, reason: "It's a beautiful piece that will improve your finger strength.", advice: "Focus on the dynamics and expression." }];
+        composer: "Ludwig van Beethoven", title: "Moonlight Sonata", time_to_play: 5, reason: "It's a beautiful piece that will improve your finger strength.", advice: "Focus on the dynamics and expression." }];
 
 
     for (let i = 0; i < message.length; i++) {
@@ -33,7 +33,7 @@ function createEachElementInSuggestionCard(suggestedPiece) {
     title.textContent = `Title: ${suggestedPiece.title}`;
     const timePlayed = document.createElement('li');
     timePlayed.classList.add('time-played');
-    timePlayed.textContent = `Time to play: ${suggestedPiece.times_to_play}`;
+    timePlayed.textContent = `Time to play: ${suggestedPiece.time_to_play}`;
     const reasoning = document.createElement('li');
     reasoning.classList.add('reasoning');
     reasoning.textContent = `Pourquoi: ${suggestedPiece.reason}`;
@@ -47,13 +47,6 @@ function appendSuggestionCards(paragraph, suggestions) {
     suggestions.forEach(suggestion => {
         paragraph.appendChild(suggestion);
     });
-}
-
-function parseRecommendationData(data) {
-    const cleanedResponse = data
-        .replace(/^```json\s*/, "")
-        .replace(/\s*```$/, "");
-    return JSON.parse(cleanedResponse);
 }
 
 export function clearPreviousSuggestions() {

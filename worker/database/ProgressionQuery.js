@@ -16,11 +16,10 @@ export class ProgressionQuery {
 
     async modifyProgressionData(request) {
         const requestBody = await request.json();
-        const level = requestBody.level;
 
         const result = await this.env.piano_learn
-            .prepare("UPDATE progression SET level = ? WHERE id = 1")
-            .bind(level)
+            .prepare("UPDATE progression SET level = ?, experience = ? WHERE id = 1")
+            .bind(requestBody.level, requestBody.experience)
             .run();
         if (!result.success) {
             return failureResponse("Failed to update progression data.", 500);

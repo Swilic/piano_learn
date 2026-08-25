@@ -2,7 +2,6 @@ export async function loadProgression() {
     const levelData = await getLevelData();
     const level = levelData[0].level;
     const completedPiecesData = await getCompletedPieces();
-
     return {
         level: level,
         completedPieces: completedPiecesData
@@ -18,7 +17,7 @@ export function checkIfPieceAlreadyCompleted(pieceId, completedPieces) {
     return { already_played: false, timePlayed: 0 };
 }
 
-async function getLevelData() {
+export async function getLevelData() {
     const response = await fetch("http://localhost:8787/progression", {
         method: "GET",
         headers: {
