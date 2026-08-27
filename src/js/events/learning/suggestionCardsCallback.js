@@ -1,7 +1,6 @@
 import { clearPreviousSuggestions } from "./suggestionsButtonCallback.js";
 import { savePiece } from "../../network/addPieceRequest.js";
 import { loadProgression, checkIfPieceAlreadyCompleted } from "../../repositories/progressionData.js";
-import { handleMathButtonEvent } from "./mathButtonCallback.js";
 import { createActiveCard } from "../../builders/learningCard.js";
 import { handleEventListenersForMathButtons } from "./setupEvents.js";
 

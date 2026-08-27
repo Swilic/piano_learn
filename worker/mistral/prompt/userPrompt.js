@@ -30,7 +30,7 @@ sous cette forme:
       "composer": "Pachelbel",
       "difficulty": 5,
       "reason": "...",
-      "conseil": "...",
+      "advice": "...",
       "time_to_play": 10
     },
     {
@@ -38,7 +38,7 @@ sous cette forme:
       "composer": "Yiruma",
       "difficulty": 5.5,
       "reason": "...",
-      "conseil": "...",
+      "advice": "...",
       "time_to_play": 3
     }
   ]
