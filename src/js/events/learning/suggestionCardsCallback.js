@@ -8,7 +8,9 @@ export async function handleSuggestionEvent(event) {
     clearPreviousSuggestions();
     const jsonData = await parseSelectedCardData(event.currentTarget);
     savePieceSessionStorage(jsonData);
-    createActiveCard()
+    showActiveCard();
+    hideSuggestionCards();
+    createActiveCard();
     sendRequestToDatabase(jsonData);
     handleEventListenersForMathButtons();
 }
@@ -32,6 +34,15 @@ function savePieceSessionStorage(jsonData) {
     sessionStorage.setItem('activePiece', JSON.stringify(completed_piece));
 }
 
+export function showActiveCard() {
+    const contentActiveCard = document.getElementsByClassName('content-active-card')[0];
+    contentActiveCard.hidden = false;
+}
+function hideSuggestionCards() {
+    const contentSuggestion = document.getElementById('content-suggestion');
+    contentSuggestion.visible = true;
+}
+
 // BACKEND PART
 function sendRequestToDatabase(jsonData) {
     const completed_piece = {
@@ -49,4 +60,5 @@ export function clearActiveCard() {
         contentActiveCard.removeChild(contentActiveCard.firstChild);
     }
     sessionStorage.removeItem('activePiece');
+    contentActiveCard.hidden = true;
 }

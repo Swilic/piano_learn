@@ -1,6 +1,6 @@
 export async function savePiece(json) {
     try {
-        const response = await fetch('http://localhost:8787/progression/pieces', {
+        const response = await fetch('https://pianolearn.diamankazberuk.workers.dev/progression/pieces', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

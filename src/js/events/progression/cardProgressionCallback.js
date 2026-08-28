@@ -1,9 +1,16 @@
-export function handleSuggestionEvent(event) {
+import { deletePieceRequest } from "../../network/deletePieceRequest.js";
+
+export async function handleSuggestionEvent(event) {
     const selectedCard = event.currentTarget;
     if (selectedCard.classList.contains('empty-card-progression')) {
         return;
     }
     const completed_piece = createCompletedPieceObject(selectedCard);
+    if(event.shiftKey) {
+        await deletePieceRequest(completed_piece);
+        window.location.reload();
+        return;
+    }
     sessionStorage.setItem('activePiece', JSON.stringify(completed_piece));
     sessionStorage.setItem('activeProgressionCard', 'true');
     window.location.href = "learning.html";

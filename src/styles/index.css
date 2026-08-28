@@ -90,8 +90,8 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 12vw;
-  height: 8vh;
+  width: 12rem;
+  height: 3rem;
   text-decoration: none;
   color: white;
   background-image: linear-gradient(-45deg, #1E31CB 0%, #5C6BC0 50%, #1E31CB 100%);
@@ -143,12 +143,34 @@ a.back-arrow-link:active {
   transform: scale(0.9);
 }
 
+#content-suggestion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 95vw;
+  padding: 20px;
+}
+#content-suggestion[hidden] {
+  display: none;
+}
+
 .suggestion-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  width: 95%;
+  background-color: #cbd3fd;
+  border-radius: 12px;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.4);
+  padding: 15px 20px;
+  margin: 5px;
+}
+.suggestion-card li {
+  font-size: 1.1rem;
+  margin: 0.15rem 0;
+  list-style: none;
 }
 
 .new-piece-input-container {
@@ -277,6 +299,75 @@ a.anchor-button-choice:hover {
 }
 a.anchor-button-choice:active {
   color: white;
+}
+
+#ask-mistral-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 12rem;
+  height: 3rem;
+  text-decoration: none;
+  color: white;
+  background-image: linear-gradient(-45deg, #1E31CB 0%, #5C6BC0 50%, #1E31CB 100%);
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  border: none;
+  border-radius: 16px;
+  padding: 5px 10px;
+  margin: 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+#ask-mistral-button:hover {
+  color: white;
+  animation: buttonAnimation 0.5s ease-in-out forwards;
+}
+#ask-mistral-button:hover:active {
+  color: white;
+  transform: scale(0.85);
+  transition: transform 0.1s ease-in-out;
+}
+
+.content-active-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #cbd3fd;
+  border-radius: 12px;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.4);
+}
+.content-active-card[hidden] {
+  display: none;
+}
+
+.active-card-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.active-card-container .math {
+  background-color: #90b6f0;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+.active-card-container .math:hover {
+  background-color: #6b9be0;
+}
+.active-card-container .math:active {
+  background-color: #855ccd;
+  color: white;
+}
+
+.active-card {
+  padding-bottom: 20px;
+  margin: 0 15px;
 }
 
 .top-bar {

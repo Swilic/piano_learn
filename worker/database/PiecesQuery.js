@@ -5,6 +5,22 @@ export class PiecesQuery {
         this.env = env;
     }
 
+    async deletePieceData(request) {
+        const requestBody = await request.json();
+        const checkResult = await this.checkBeforeUpdate(requestBody);
+        if (checkResult.ok === false) {
+            return failureResponse("Piece does not exist.");
+        }
+        const result = await this.env.piano_learn
+            .prepare("DELETE FROM completed_pieces WHERE composer = ? AND title = ?")
+            .bind(requestBody.composer, requestBody.title)
+            .run();
+        if (!result.success) {
+            return failureResponse("Failed to delete piece data.");
+        }
+        return successResponse("Piece data deleted.");
+    }
+
     async fetchPiecesData() {
         const result = await this.env.piano_learn
             .prepare("SELECT * FROM completed_pieces")

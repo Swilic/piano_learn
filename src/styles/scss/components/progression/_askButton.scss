@@ -1,14 +1,7 @@
-@use '../keyframes/buttons';
-@use '../variables/colors';
+@use '../../keyframes/_buttons.scss';
+@use '../../variables/_colors.scss';
 
-.button-add-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-#add-card-button {
+#ask-mistral-button {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -23,12 +16,17 @@
   border: none;
   border-radius: 16px;
   padding: 5px 10px;
-  margin: 10px 0;
+  margin: 10px 10px;
   font-size: 16px;
   cursor: pointer;
-
   &:hover {
     color: white;
     animation: buttonAnimation 0.5s ease-in-out forwards;
+    &:active {
+      color: white;
+      transform: scale(0.85);
+      transition: transform 0.1s ease-in-out;
+    }
   }
 }
+

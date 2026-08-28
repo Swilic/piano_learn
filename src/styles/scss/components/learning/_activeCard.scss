@@ -1,0 +1,44 @@
+.content-active-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #cbd3fd;
+  border-radius: 12px;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.4);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.active-card-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  & .math {
+    background-color: #90b6f0;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #6b9be0;
+    }
+
+    &:active {
+      background-color: #855ccd;
+      color: white;
+    }
+  }
+}
+
+.active-card {
+  padding-bottom: 20px;
+  margin: 0 15px;
+}

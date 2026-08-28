@@ -18,5 +18,9 @@ export async function handleRequest(request, env, path) {
         const response = await piecesQuery.addNewPiece(request);
         return response;
     }
+    else if (request.method === "DELETE") {
+        const response = await piecesQuery.deletePieceData(request);
+        return response;
+    }
     return failureResponse("Method not allowed", 405);
 }

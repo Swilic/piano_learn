@@ -1,11 +1,13 @@
 @use 'base';
 @use 'pages/menu';
-@use 'components/card';
+@use 'components/cards/progressionCard';
 @use 'components/addButton';
 @use 'components/back-arrow';
 @use 'components/learning-card';
 @use 'components/newInputCard';
 @use 'components/menu/title';
 @use 'components/menu/buttons';
+@use 'components/progression/askButton';
+@use 'components/learning/activeCard';
 @use 'parts/top';
 @use 'parts/content';

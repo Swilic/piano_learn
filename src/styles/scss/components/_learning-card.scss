@@ -1,7 +1,31 @@
+#content-suggestion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 95vw;
+  padding: calc(40px / 2);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
 .suggestion-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  width: 95%;
+  background-color: #cbd3fd;
+  border-radius: 12px;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.4);
+  padding: 15px calc(40px / 2);
+  margin: calc(10px / 2);
+
+  & li {
+    font-size: 1.1rem;
+    margin: 0.15rem 0;
+    list-style: none;
+  }
 }

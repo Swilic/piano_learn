@@ -1,6 +1,6 @@
 
 export async function askMistralForSuggestions() {
-    const response = await fetch('http://localhost:8787/', {
+    const response = await fetch('https://pianolearn.diamankazberuk.workers.dev/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
