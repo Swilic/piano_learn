@@ -1,6 +1,9 @@
 export function createNewPieceInput() {
     const newPieceInputContainer = document.createElement('div');
     newPieceInputContainer.classList.add('new-piece-input-container');
+    const inputContainer = document.createElement('div');
+    inputContainer.classList.add('input-container');
+    newPieceInputContainer.appendChild(inputContainer);
 
     const composerInput = document.createElement('input');
     composerInput.type = 'text';
@@ -18,6 +21,10 @@ export function createNewPieceInput() {
     timePlayedInput.placeholder = 'Time Played';
     timePlayedInput.classList.add('time-played-input');
 
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('button-container');
+    newPieceInputContainer.appendChild(buttonContainer);
+
     const validateButton = document.createElement('button');
     validateButton.textContent = 'Validate';
     validateButton.classList.add('validate-button');
@@ -26,11 +33,11 @@ export function createNewPieceInput() {
     cancelButton.textContent = 'Cancel';
     cancelButton.classList.add('cancel-button');
 
-    newPieceInputContainer.appendChild(composerInput);
-    newPieceInputContainer.appendChild(titleInput);
-    newPieceInputContainer.appendChild(timePlayedInput);
-    newPieceInputContainer.appendChild(validateButton);
-    newPieceInputContainer.appendChild(cancelButton);
+    inputContainer.appendChild(composerInput);
+    inputContainer.appendChild(titleInput);
+    inputContainer.appendChild(timePlayedInput);
+    buttonContainer.appendChild(validateButton);
+    buttonContainer.appendChild(cancelButton);
 
     return newPieceInputContainer;
 }

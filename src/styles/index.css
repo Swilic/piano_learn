@@ -4,6 +4,23 @@ body {
   height: 100vh;
 }
 
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.title-menu {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  position: relative;
+  top: -15vh;
+}
+
 .progression-container {
   display: flex;
   flex-direction: row;
@@ -23,11 +40,73 @@ body {
   justify-content: center;
   width: 300px;
   height: 170px;
-  background-color: #fff;
+  background-color: #cbd3fd;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px;
   margin: 10px;
+}
+.card-progression.empty-card-progression {
+  background-color: #f0f0f0;
+  opacity: 0.5;
+}
+.card-progression.empty-card-progression:hover {
+  box-shadow: none;
+  transform: none;
+  cursor: default;
+}
+.card-progression:hover {
+  box-shadow: 5px 6px 10px rgba(0, 0, 0, 0.3);
+  transform: translate(-2px, -2px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+@keyframes buttonAnimation {
+  0% {
+    background-position: 0% 50%;
+    scale: 1;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  75% {
+    scale: 0.95;
+  }
+  100% {
+    background-position: 100% 50%;
+    scale: 1.1;
+  }
+}
+.button-add-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#add-card-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 12vw;
+  height: 8vh;
+  text-decoration: none;
+  color: white;
+  background-image: linear-gradient(-45deg, #1E31CB 0%, #5C6BC0 50%, #1E31CB 100%);
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  border: none;
+  border-radius: 16px;
+  padding: 5px 10px;
+  margin: 10px 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+#add-card-button:hover {
+  color: white;
+  animation: buttonAnimation 0.5s ease-in-out forwards;
 }
 
 .back-choices-menu {
@@ -74,19 +153,130 @@ a.back-arrow-link:active {
 
 .new-piece-input-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 700px;
-  height: 70px;
+  width: 55vw;
+  height: 20vh;
   background-color: #F4F4F4;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px;
+}
+.new-piece-input-container > .input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.new-piece-input-container > .input-container > .composer-input {
+  width: 20vw;
+  margin-right: 10px;
+}
+.new-piece-input-container > .input-container > .title-input {
+  width: 20vw;
+  margin-right: 10px;
+}
+.new-piece-input-container > .input-container > .time-played-input {
+  width: 4vw;
+  margin-right: 10px;
+}
+.new-piece-input-container > .input-container > input {
+  height: 5vh;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+}
+.new-piece-input-container > .input-container > input:focus {
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+.new-piece-input-container button {
+  width: 9vw;
+  height: 6vh;
+  border-radius: 12px;
+  border: none;
+  background-color: #007BFF;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+.new-piece-input-container button:hover {
+  background-color: #0056b3;
+}
+
+.title-menu > h1 {
+  background-image: linear-gradient(-45deg, #2EBBD2 0%, #5FC05C 50%, #2EBBD2 100%);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradient-animation 3s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.menu-button-choice {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: white;
+  background-image: linear-gradient(-45deg, #1E31CB 0%, #5C6BC0 50%, #1E31CB 100%);
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  border: none;
+  border-radius: 16px;
+  margin: 10px 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+.menu-button-choice:hover {
+  color: white;
+  animation: buttonAnimation 0.5s ease-in-out forwards;
+}
+.menu-button-choice:active {
+  color: white;
+  transform: scale(0.85);
+  transition: transform 0.1s ease-in-out;
+}
+
+a.anchor-button-choice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  width: 100%;
+  height: 100%;
+  padding: 5px 30px;
+}
+a.anchor-button-choice:hover {
+  color: white;
+}
+a.anchor-button-choice:active {
+  color: white;
 }
 
 .top-bar {

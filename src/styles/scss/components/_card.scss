@@ -22,9 +22,24 @@ $number-of-cards-per-row: 3;
   justify-content: center;
   width: $card-width;
   height: $card-height;
-  background-color: #fff;
+  background-color: #cbd3fd;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: $card-gap /2;
-  margin: $card-gap / 2;
+  padding: calc($card-gap / 2);
+  margin: calc($card-gap / 2);
+  &.empty-card-progression {
+    background-color: #f0f0f0;
+    opacity: 0.5;
+    &:hover {
+      box-shadow: none;
+      transform: none;
+      cursor: default;
+    }
+  }
+  &:hover {
+    box-shadow: 5px 6px 10px rgba(0, 0, 0, 0.3);
+    transform: translate(-2px, -2px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
 }

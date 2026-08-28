@@ -1,0 +1,16 @@
+@keyframes buttonAnimation {
+  0% {
+    background-position: 0% 50%;
+    scale: 1;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  75% {
+    scale: 0.95;
+  }
+  100% {
+    background-position: 100% 50%;
+    scale: 1.1;
+  }
+}

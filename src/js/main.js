@@ -1,3 +1,3 @@
-fetch('https://pianolearn.diamankazberuk.workers.dev/')
-    .then(response => response.json())
-    .then(json => console.log(json))
+import { setupEvents } from "./events/menu/setupEvents.js";
+
+setupEvents();
