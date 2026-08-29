@@ -8,7 +8,7 @@ export async function handleSuggestionEvent(event) {
     const completed_piece = createCompletedPieceObject(selectedCard);
     if(event.shiftKey) {
         await deletePieceRequest(completed_piece);
-        window.location.reload();
+        // window.location.reload();
         return;
     }
     sessionStorage.setItem('activePiece', JSON.stringify(completed_piece));
