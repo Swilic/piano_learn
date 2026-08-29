@@ -4,10 +4,10 @@ import { clearActiveCard } from "./suggestionCardsCallback.js";
 export async function handleSuggestionEvent() {
     clearActiveCard();
     showSuggestionCards();
-    const data = await askMistralForSuggestions();
-    const message = parseRecommendationData(data).recommandations;
-    // const message = [{ 
-    //     composer: "Ludwig van Beethoven", title: "Moonlight Sonata", time_to_play: 5, reason: "It's a beautiful piece that will improve your finger strength.", advice: "Focus on the dynamics and expression." }];
+    // const data = await askMistralForSuggestions();
+    // const message = parseRecommendationData(data).recommandations;
+    const message = [{ 
+        composer: "Ludwig van Beethoven", title: "Moonlight Sonata", time_to_play: 5, reason: "It's a beautiful piece that will improve your finger strength.", advice: "Focus on the dynamics and expression." }];
 
     for (let i = 0; i < message.length; i++) {
         const suggestedPiece = message[i];
