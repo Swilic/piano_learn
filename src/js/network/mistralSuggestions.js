@@ -7,7 +7,7 @@ export async function askMistralForSuggestions(json) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(json)
+        body: JSON.stringify(level : json.level, completed_pieces : json.completedPieces)
     });
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
