@@ -1,5 +1,7 @@
 
 export async function askMistralForSuggestions(json) {
+
+    console.log("Sending request to Mistral with data:", json);
     const response = await fetch('https://pianolearn.diamankazberuk.workers.dev/', {
         method: 'POST',
         headers: {
