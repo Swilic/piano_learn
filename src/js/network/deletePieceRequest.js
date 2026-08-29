@@ -1,3 +1,6 @@
+import { getLevelData } from "../repositories/progressionData";
+import { updateProgression } from "./updateProgression";
+
 export async function deletePieceRequest(completed_piece) {
     try {
         const response = await fetch('https://pianolearn.diamankazberuk.workers.dev/progression/pieces', {
@@ -7,6 +10,7 @@ export async function deletePieceRequest(completed_piece) {
             },
             body: JSON.stringify(completed_piece)
         });
+        handleProgression(completed_piece);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -14,4 +18,17 @@ export async function deletePieceRequest(completed_piece) {
     } catch (error) {
         console.error('Error deleting piece:', error);
     }
+}
+
+function handleProgression(data) {
+    let lvl, experience = getLevelData();
+    const expLess = 100 / data.time_to_play;
+    const expGained = expLess * data.time_played;
+    experience -= expGained;
+    lvl = Math.floor(experience / 100);
+    const json = {
+        level: lvl,
+        experience: experience
+    }
+   updateProgression(json); 
 }
