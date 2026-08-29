@@ -10,7 +10,7 @@ export async function deletePieceRequest(completed_piece) {
             },
             body: JSON.stringify(completed_piece)
         });
-        handleProgression(completed_piece);
+        await handleProgression(completed_piece);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -31,5 +31,5 @@ async function handleProgression(data) {
         level: lvl,
         experience: experience
     }
-   updateProgression(json); 
+   await updateProgression(json); 
 }
