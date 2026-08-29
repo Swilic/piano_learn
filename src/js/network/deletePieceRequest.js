@@ -1,5 +1,5 @@
-import { getLevelData } from "../repositories/progressionData";
-import { updateProgression } from "./updateProgression";
+import { getLevelData } from "../repositories/progressionData.js";
+import { updateProgression } from "./updateProgression.js";
 
 export async function deletePieceRequest(completed_piece) {
     try {
@@ -21,6 +21,7 @@ export async function deletePieceRequest(completed_piece) {
 }
 
 function handleProgression(data) {
+    console.log("Handling progression for deleted piece:", data);
     let lvl, experience = getLevelData();
     const expLess = 100 / data.time_to_play;
     const expGained = expLess * data.time_played;
