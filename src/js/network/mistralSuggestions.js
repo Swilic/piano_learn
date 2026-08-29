@@ -1,19 +1,11 @@
 
-export async function askMistralForSuggestions() {
+export async function askMistralForSuggestions(json) {
     const response = await fetch('https://pianolearn.diamankazberuk.workers.dev/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            level: 1,
-            completed_pieces: [{
-                composer: "Beethoven",
-                title: "Symphony No. 5",
-                time_played: 5
-            }
-            ]
-        })
+        body: JSON.stringify(json)
     });
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
