@@ -21,6 +21,7 @@ export async function deletePieceRequest(completed_piece) {
 }
 
 async function handleProgression(data) {
+    console.log("Handling progression for deleted piece:", data);
     const levelData = await getLevelData();
     console.log("Level data:", levelData);
     let experience = levelData[0].experience;
