@@ -5,7 +5,7 @@ import { clearActiveCard } from "./suggestionCardsCallback.js";
 export async function handleSuggestionEvent() {
     clearActiveCard();
     showSuggestionCards();
-    const completed_pieces = loadProgression();
+    const completed_pieces = await loadProgression();
     const data = await askMistralForSuggestions(completed_pieces);
     const message = parseRecommendationData(data).recommandations;
     // const message = [{ 
