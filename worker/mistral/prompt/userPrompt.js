@@ -49,5 +49,5 @@ Tu dois me répondre en JSON, sans texte supplémentaire, et uniquement le JSON.
 }
 
 function createCompletedPiecesString (completedPieces) {
-    return completedPieces.map(piece => `${piece.composer} - ${piece.title}`).join(", ");
+    return completedPieces.map(piece => `${piece.composer} - ${piece.title} (jouer ${piece.time_played} fois`).join(", ");
 }
