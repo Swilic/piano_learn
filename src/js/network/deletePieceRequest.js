@@ -27,8 +27,8 @@ async function handleProgression(data) {
     let experience = levelData[0].experience;
     let lvl = levelData[0].level;
     console.log("Current experience:", experience, "Current level:", lvl);
-    const expLess = 100 / data.time_to_play;
-    const expGained = expLess * data.time_played;
+    const expLess = 100 / data.timeToPlay;
+    const expGained = expLess * data.timePlayed;
     experience -= expGained;
     lvl = Math.floor(experience / 100);
     const json = {
