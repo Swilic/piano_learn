@@ -20,9 +20,9 @@ export async function deletePieceRequest(completed_piece) {
     }
 }
 
-function handleProgression(data) {
+async function handleProgression(data) {
     console.log("Handling progression for deleted piece:", data);
-    let lvl, experience = getLevelData();
+    let lvl, experience = await getLevelData();
     const expLess = 100 / data.time_to_play;
     const expGained = expLess * data.time_played;
     experience -= expGained;
