@@ -1,4 +1,4 @@
-import { successResponse, failureResponse } from "../network/networkResponseJsonType";
+import { successResponse, failureResponse } from "../network/networkResponseJsonType.js";
 export class ProgressionQuery {
     constructor(env) {
         this.env = env;
