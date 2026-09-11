@@ -39,12 +39,12 @@ export default class Mistral {
         };
     }
 
-    async handleErrorResponse(mistral) {
-        const errorText = await mistral.text()
+    async handleErrorResponse(mistralResponse) {
+        const errorText = await mistralResponse.text()
 
         console.error(
             "Mistral error:",
-            mistral.status,
+            mistralResponse.status,
             errorText
         );
 

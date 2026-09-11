@@ -1,6 +1,8 @@
+import { URL } from './url.js';
+
 export async function updateProgression(json) {
     try {
-        const response = await fetch('https://pianolearn.diamankazberuk.workers.dev/progression', {
+        const response = await fetch(URL + 'progression', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

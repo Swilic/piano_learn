@@ -1,6 +1,8 @@
+import {URL} from './url.js';
+
 export async function savePiece(json) {
     try {
-        const response = await fetch('https://pianolearn.diamankazberuk.workers.dev/progression/pieces', {
+        const response = await fetch(URL + 'progression/pieces', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

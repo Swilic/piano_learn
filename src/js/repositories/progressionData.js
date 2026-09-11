@@ -1,3 +1,5 @@
+import { URL } from '../network/url.js';
+
 export async function loadProgression() {
     const levelData = await getLevelData();
     const level = levelData[0].level;
@@ -18,7 +20,7 @@ export function checkIfPieceAlreadyCompleted(pieceId, completedPieces) {
 }
 
 export async function getLevelData() {
-    const response = await fetch("https://pianolearn.diamankazberuk.workers.dev/progression", {
+    const response = await fetch(URL + "progression", {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -32,7 +34,7 @@ export async function getLevelData() {
 }
 
 async function getCompletedPieces() {
-    const response = await fetch("https://pianolearn.diamankazberuk.workers.dev/progression/pieces", {
+    const response = await fetch(URL + "progression/pieces", {
         method: "GET",
         headers: {
             "Content-Type": "application/json"

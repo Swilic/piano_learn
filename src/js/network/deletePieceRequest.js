@@ -1,9 +1,10 @@
 import { getLevelData } from "../repositories/progressionData.js";
 import { updateProgression } from "./updateProgression.js";
+import { URL } from './url.js';
 
 export async function deletePieceRequest(completed_piece) {
     try {
-        const response = await fetch('https://pianolearn.diamankazberuk.workers.dev/progression/pieces', {
+        const response = await fetch(URL + 'progression/pieces', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -32,5 +33,5 @@ async function handleProgression(data) {
         level: lvl,
         experience: experience
     }
-   await updateProgression(json); 
+    await updateProgression(json);
 }

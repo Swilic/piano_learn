@@ -1,7 +1,8 @@
+import { URL } from './url.js';
 
 export async function askMistralForSuggestions(json) {
 
-    const response = await fetch('https://pianolearn.diamankazberuk.workers.dev/', {
+    const response = await fetch(URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
