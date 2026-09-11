@@ -7,6 +7,7 @@ const role = {
 }
 
 const model = {
+    codestral: "codestral-2508",
     medium: "mistral-small-latest"
 }
 
@@ -24,7 +25,7 @@ export default class Mistral {
     }
     createRequestBody() {
         return {
-            model: model.medium,
+            model: model.codestral,
             messages: [
                 {
                     role: role.system,
@@ -43,7 +44,7 @@ export default class Mistral {
 
         console.error(
             "Mistral error:",
-            mistralResponse.status,
+            mistral.status,
             errorText
         );
 

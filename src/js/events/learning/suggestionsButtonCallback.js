@@ -6,11 +6,8 @@ export async function handleSuggestionEvent() {
     clearActiveCard();
     showSuggestionCards();
     const completed_pieces = await loadProgression();
-    console.log("Completed pieces:", completed_pieces);
     const data = await askMistralForSuggestions(completed_pieces);
-    console.log("Mistral response:", data);
     const message = parseRecommendationData(data).recommandations;
-    console.log("Parsed recommendations:", message);
     // const message = [{ 
     //     composer: "Ludwig van Beethoven", title: "Moonlight Sonata", time_to_play: 5, reason: "It's a beautiful piece that will improve your finger strength.", advice: "Focus on the dynamics and expression." }];
 
